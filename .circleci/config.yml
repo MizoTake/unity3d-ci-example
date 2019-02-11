@@ -110,9 +110,6 @@ jobs:
       - run:
           environment:
             BUILD_TARGET: Android
-            PATH: $HOME/.linuxbrew/bin:$PATH
-            MANPATH: $HOME/.linuxbrew/share/man:$MANPATH
-            INFOPATH: $HOME/.linuxbrew/share/info:$INFOPATH
             BUNDLE_IDENTIFIER: com.sample.circleci
           command: |
             chmod -R 755 ./ci/build.sh
