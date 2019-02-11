@@ -4,6 +4,8 @@ using UnityEditor;
 
 static class BuildCommand
 {
+	static bool IsAndroid => GetBuildTarget ().ToString ().ToLower ().Contains ("android");
+
 	static string GetArgument (string name)
 	{
 		string[] args = Environment.GetCommandLineArgs ();
@@ -75,6 +77,10 @@ static class BuildCommand
 			// webgl produces a folder with index.html inside, there is no executable name for this buildTarget
 			buildName = "";
 		}
+		else if (IsAndroid)
+		{
+			buildName += ".apk";
+		}
 		return buildPath + buildName;
 	}
 
@@ -124,14 +130,19 @@ static class BuildCommand
 		Console.WriteLine (":: Performing build");
 		//PlayerSettings.keystorePass = getEnv ("KEYSTORE_PASS", true);
 		//PlayerSettings.keyaliasPass = getEnv ("KEY_ALIAS_PASS", true);
-		EditorSetup.AndroidSdkRoot = getEnv ("ANDROID_SDK_ROOT");
-		EditorSetup.JdkRoot = getEnv ("JDK_ROOT");
-		EditorSetup.AndroidNdkRoot = getEnv ("ANDROID_NDK_ROOT");
-		PlayerSettings.bundleIdentifier = Environment.GetEnvironmentVariable ("BUNDLE_IDENTIFIER");
 		var buildTarget = GetBuildTarget ();
 		var buildPath = GetBuildPath ();
 		var buildName = GetBuildName ();
 		var fixedBuildPath = GetFixedBuildPath (buildTarget, buildPath, buildName);
+
+		if (IsAndroid)
+		{
+			EditorSetup.AndroidSdkRoot = getEnv ("ANDROID_HOME");
+			string java_home = "/usr/lib/jvm/java-8-openjdk-amd64/" + "bin";
+			EditorSetup.JdkRoot = java_home;
+			EditorSetup.AndroidNdkRoot = getEnv ("ANDROID_NDK_HOME");
+			PlayerSettings.bundleIdentifier = Environment.GetEnvironmentVariable ("BUNDLE_IDENTIFIER");
+		}
 
 		BuildPipeline.BuildPlayer (GetEnabledScenes (), fixedBuildPath, buildTarget, GetBuildOptions ());
 		Console.WriteLine (":: Done with build");

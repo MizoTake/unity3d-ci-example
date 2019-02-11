@@ -3,6 +3,9 @@ references:
   docker_image: &docker_image
     docker:
       - image: gableroux/unity3d:2018.2.6f1
+  docker_image_android: &docker_image_android
+    docker:
+      - image: gableroux/unity3d:2018.3.3f1-android
   setup_unity_license_env_var: &setup_unity_license_env_var
     command: |
       mkdir -p /root/.cache/unity3d
@@ -96,22 +99,11 @@ jobs:
       - store_artifacts:
           path: './Builds/'
   build_Android:
-    <<: *docker_image
+    <<: *docker_image_android
     steps:
       - run:
           command: |
             apt-get update && apt-get install -y git build-essential curl file m4 ruby texinfo libbz2-dev libcurl4-openssl-dev libexpat-dev libncurses-dev zlib1g-dev && git --version
-            curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh > ./install.sh
-            chmod -R 777 ./install.sh 
-            sh -c ./install.sh
-            test -d ~/.linuxbrew && eval $(~/.linuxbrew/bin/brew shellenv)
-            test -d /home/linuxbrew/.linuxbrew && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
-            test -r ~/.bash_profile && echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.bash_profile
-            echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.profile
-            brew update
-            brew install android-ndk
-            brew install android-sdk
-            android update sdk --no-ui --all --filter "tools,platform-tools,build-tools-24.0.1,android-24,extra-google-google_play_services,extra-google-m2repository"
       - checkout
       - run:
           <<: *setup_unity_license_env_var
@@ -122,9 +114,6 @@ jobs:
             MANPATH: $HOME/.linuxbrew/share/man:$MANPATH
             INFOPATH: $HOME/.linuxbrew/share/info:$INFOPATH
             BUNDLE_IDENTIFIER: com.sample.circleci
-            JDK_ROOT: /usr/libexec/java_home
-            ANDROID_NDK_ROOT: /usr/local/Cellar/android-ndk-${NDK-VERSION}/${NDK-VERSION}
-            ANDROID_SDK_ROOT: /usr/local/Cellar/android-sdk/${INSTALLED_SDK_VERSION}
           command: |
             chmod -R 755 ./ci/build.sh
             ./ci/build.sh
