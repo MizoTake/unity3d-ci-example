@@ -136,11 +136,11 @@ jobs:
             BUILD_TARGET: Android
             BUILD_NAME: SampleBuild
           command: |
-            rbenv install 2.2.3
+            rbenv install 2.3.0-dev
             cp ./ci/Gemfile ./Builds/$BUILD_TARGET/Gemfile
             cd ./Builds/$BUILD_TARGET/$BUILD_NAME
             eval "$(rbenv init -)"
-            rbenv local 2.2.3
+            rbenv local 2.3.0-dev
             rbenv rehash
             rbenv exec gem install bundler
             rbenv rehash
