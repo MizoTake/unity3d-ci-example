@@ -135,11 +135,12 @@ jobs:
             ./ci/build.sh
       - run:
           environment:
+            BUILD_TARGET: Android
             BUILD_NAME: SampleBuild
-            BUILD_PATH: /root/project/Builds
+            BUILD_PATH: /project/Builds
           command: |
             $HOME/.rbenv/bin/rbenv install 2.3.3
-            cp ./ci/Gemfile $BUILD_PATH/$BUILD_NAME
+            cp ./ci/Gemfile $BUILD_PATH/$BUILD_TARGET/Gemfile
             cd $BUILD_PATH/$BUILD_NAME
             eval "$($HOME/.rbenv/bin/rbenv init -)"
             $HOME/.rbenv/bin/rbenv local 2.3.3
