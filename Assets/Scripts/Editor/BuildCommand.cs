@@ -33,13 +33,13 @@ static class BuildCommand
         string buildTargetName = GetArgument("customBuildTarget");
         Console.WriteLine(":: Received customBuildTarget " + buildTargetName);
 
-        if (buildTargetName.ToLower() == "android")
+        if (IsAndroid)
         {
 #if !UNITY_5_6_OR_NEWER
             // https://issuetracker.unity3d.com/issues/buildoptions-dot-acceptexternalmodificationstoplayer-causes-unityexception-unknown-project-type-0
             // Fixed in Unity 5.6.0
             // side effect to fix android build system:
-            // EditorUserBuildSettings.androidBuildSystem = AndroidBuildSystem.Internal;
+            EditorUserBuildSettings.androidBuildSystem = AndroidBuildSystem.Internal;
 #endif
         }
 
@@ -78,10 +78,6 @@ static class BuildCommand
         {
             // webgl produces a folder with index.html inside, there is no executable name for this buildTarget
             buildName = "";
-        }
-        else if (IsAndroid)
-        {
-            buildName += ".apk";
         }
         return buildPath + buildName;
     }
