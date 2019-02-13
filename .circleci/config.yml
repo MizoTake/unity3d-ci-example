@@ -113,7 +113,12 @@ jobs:
     steps:
       - run:
           command: |
-            apt-get update && apt-get install -y git build-essential curl file m4 ruby texinfo libbz2-dev libcurl4-openssl-dev libexpat-dev libncurses-dev zlib1g-dev && git --version
+            apt-get update && apt-get install -y git build-essential curl file m4 ruby texinfo libbz2-dev libcurl4-openssl-dev libexpat-dev libncurses-dev zlib1g-dev zip unzip && git --version
+            cd /opt && \
+            wget -q https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip -O android-sdk.zip && \
+            unzip -q android-sdk.zip -d android-sdk-linux && \
+            rm -f android-sdk.zip && \
+            ls -ahl android-sdk-linux
       - checkout
       - run:
           <<: *setup_unity_license_env_var
@@ -122,7 +127,10 @@ jobs:
             BUILD_TARGET: Android
             BUNDLE_IDENTIFIER: com.sample.circleci
             BUILD_NAME: SampleBuild
+            ANDROID_HOME: /opt/android-sdk-linux
+            PATH: ${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools
           command: |
+            chmod -R 755 .${ANDROID_HOME}/tools/*
             chmod -R 755 ./ci/build.sh
             ./ci/build.sh
       - run:
