@@ -113,9 +113,7 @@ jobs:
     steps:
       - run:
           command: |
-            apt-get update && apt-get install -y git build-essential curl file m4 ruby texinfo libbz2-dev libcurl4-openssl-dev libexpat-dev libncurses-dev zlib1g-dev zip unzip libreadline-dev && git --version
-            git clone https://github.com/sstephenson/rbenv.git ~/.rbenv && \
-            git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build && \
+            apt-get update && apt-get install -y git rbenv ruby-build build-essential curl file m4 ruby texinfo libbz2-dev libcurl4-openssl-dev libexpat-dev libncurses-dev zlib1g-dev zip unzip libreadline-dev && git --version
             cd /opt && \
             wget -q https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip -O android-sdk.zip && \
             unzip -q android-sdk.zip -d android-sdk-linux && \
@@ -138,14 +136,14 @@ jobs:
             BUILD_TARGET: Android
             BUILD_NAME: SampleBuild
           command: |
-            $HOME/.rbenv/bin/rbenv install 2.3.3
+            rbenv install 2.3.3
             cp ./ci/Gemfile ./Builds/$BUILD_TARGET/Gemfile
             cd ./Builds/$BUILD_TARGET/$BUILD_NAME
-            eval "$($HOME/.rbenv/bin/rbenv init -)"
-            $HOME/.rbenv/bin/rbenv local 2.3.3
-            $HOME/.rbenv/bin/rbenv rehash
-            $HOME/.rbenv/bin/rbenv exec gem install bundler
-            $HOME/.rbenv/bin/rbenv rehash
+            eval "$(rbenv init -)"
+            rbenv local 2.3.3
+            rbenv rehash
+            rbenv exec gem install bundler
+            rbenv rehash
             bundle install --path .bundle
             bundle exec fastlane init
             bundle exec fastalen beta
