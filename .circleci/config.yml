@@ -113,7 +113,7 @@ jobs:
     steps:
       - run:
           command: |
-            apt-get update && apt-get install -y git rbenv ruby-build build-essential curl file m4 ruby texinfo libbz2-dev libcurl4-openssl-dev libexpat-dev libncurses-dev zlib1g-dev zip unzip libreadline-dev && git --version && apt-get update
+            apt-get update && apt-get install -y git rbenv ruby-build build-essential curl file m4 ruby texinfo libbz2-dev libcurl4-openssl-dev libexpat-dev libncurses-dev zlib1g-dev zip unzip libreadline-dev && git --version
             cd /opt && \
             wget -q https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip -O android-sdk.zip && \
             unzip -q android-sdk.zip -d android-sdk-linux && \
@@ -136,11 +136,11 @@ jobs:
             BUILD_TARGET: Android
             BUILD_NAME: SampleBuild
           command: |
-            rbenv install 2.3.3
+            rbenv install 2.2.3
             cp ./ci/Gemfile ./Builds/$BUILD_TARGET/Gemfile
             cd ./Builds/$BUILD_TARGET/$BUILD_NAME
             eval "$(rbenv init -)"
-            rbenv local 2.3.3
+            rbenv local 2.2.3
             rbenv rehash
             rbenv exec gem install bundler
             rbenv rehash
