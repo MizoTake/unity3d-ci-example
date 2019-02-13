@@ -136,7 +136,6 @@ static class BuildCommand
 		var buildPath = GetBuildPath ();
 		var buildName = GetBuildName ();
 		var fixedBuildPath = GetFixedBuildPath (buildTarget, buildPath, buildName);
-		Console.WriteLine (fixedBuildPath);
 		if (IsAndroid)
 		{
 			EditorPrefs.SetString ("AndroidSdkRoot", getEnv ("ANDROID_HOME"));

@@ -76,6 +76,7 @@ jobs:
       - run:
           environment:
             BUILD_TARGET: StandaloneWindows
+            BUILD_NAME: SampleBuild
           command: |
             chmod -R 755 ./ci/build.sh
             ./ci/build.sh
@@ -97,6 +98,7 @@ jobs:
       - run:
           environment:
             BUILD_TARGET: StandaloneOSX
+            BUILD_NAME: SampleBuild
           command: |
             chmod -R 755 ./ci/build.sh
             ./ci/build.sh
@@ -119,6 +121,7 @@ jobs:
           environment:
             BUILD_TARGET: Android
             BUNDLE_IDENTIFIER: com.sample.circleci
+            BUILD_NAME: SampleBuild
           command: |
             chmod -R 755 ./ci/build.sh
             ./ci/build.sh
