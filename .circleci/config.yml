@@ -129,7 +129,6 @@ jobs:
             BUILD_NAME: SampleBuild
             ANDROID_HOME: /opt/android-sdk-linux
           command: |
-            chmod -R 755 .${ANDROID_HOME}/tools/*
             chmod -R 755 ./ci/build.sh
             ./ci/build.sh
       - run:
