@@ -136,13 +136,14 @@ jobs:
       - run:
           environment:
             BUILD_NAME: SampleBuild
+            BUILD_PATH: /root/project/Builds
           command: |
             $HOME/.rbenv/bin/rbenv install 2.3.3
             cp ./ci/Gemfile $BUILD_PATH/$BUILD_NAME
             cd $BUILD_PATH/$BUILD_NAME
             eval "$($HOME/.rbenv/bin/rbenv init -)"
             $HOME/.rbenv/bin/rbenv local 2.3.3
-            $HOME/.rbenv/bin/rbenv rehash && \
+            $HOME/.rbenv/bin/rbenv rehash
             $HOME/.rbenv/bin/rbenv exec gem install bundler
             $HOME/.rbenv/bin/rbenv rehash
             bundle install --path .bundle
