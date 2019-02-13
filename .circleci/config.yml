@@ -114,6 +114,8 @@ jobs:
       - run:
           command: |
             apt-get update && apt-get install -y git build-essential curl file m4 ruby texinfo libbz2-dev libcurl4-openssl-dev libexpat-dev libncurses-dev zlib1g-dev zip unzip && git --version
+            git clone https://github.com/sstephenson/rbenv.git ~/.rbenv && \
+            git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build && \
             cd /opt && \
             wget -q https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip -O android-sdk.zip && \
             unzip -q android-sdk.zip -d android-sdk-linux && \
@@ -131,8 +133,18 @@ jobs:
           command: |
             chmod -R 755 ./ci/build.sh
             ./ci/build.sh
+      - run:
+          environment:
+            PATH: $HOME/.rbenv/bin:$PATH
+          command: |
+            rbenv install 2.3.3
             cp ./ci/Gemfile $BUILD_PATH/$BUILD_PATH
             cd $BUILD_PATH/$BUILD_PATH
+            eval "$(rbenv init -)"
+            rbenv local 2.3.3
+            rbenv rehash && \
+            rbenv exec gem install bundler
+            rbenv rehash
             bundle install --path .bundle
             bundle exec fastlane init
             bundle exec fastalen beta
