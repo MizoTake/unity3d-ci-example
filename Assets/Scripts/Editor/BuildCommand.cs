@@ -4,7 +4,7 @@ using UnityEditor;
 
 static class BuildCommand
 {
-	static bool IsAndroid => GetBuildTarget ().ToString ().ToLower ().Contains ("android");
+	static bool IsAndroid => GetArgument ("customBuildTarget").ToString ().ToLower ().Contains ("android");
 
 	static string GetArgument (string name)
 	{
@@ -137,11 +137,11 @@ static class BuildCommand
 
 		if (IsAndroid)
 		{
-			EditorSetup.AndroidSdkRoot = getEnv ("ANDROID_HOME");
+			EditorPrefs.SetString ("AndroidSdkRoot", getEnv ("ANDROID_HOME"));
 			string java_home = "/usr/lib/jvm/java-8-openjdk-amd64/" + "bin";
-			EditorSetup.JdkRoot = java_home;
-			EditorSetup.AndroidNdkRoot = getEnv ("ANDROID_NDK_HOME");
-			PlayerSettings.bundleIdentifier = Environment.GetEnvironmentVariable ("BUNDLE_IDENTIFIER");
+			EditorPrefs.SetString ("JdkPath", java_home);
+			EditorPrefs.SetString ("AndroidNdkRootR16b", getEnv ("ANDROID_NDK_HOME"));
+			PlayerSettings.applicationIdentifier = Environment.GetEnvironmentVariable ("BUNDLE_IDENTIFIER");
 		}
 
 		BuildPipeline.BuildPlayer (GetEnabledScenes (), fixedBuildPath, buildTarget, GetBuildOptions ());
