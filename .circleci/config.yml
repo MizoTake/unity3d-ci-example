@@ -140,7 +140,7 @@ jobs:
           command: |
             $HOME/.rbenv/bin/rbenv install 2.3.3
             cp ./ci/Gemfile ./Builds/$BUILD_TARGET/Gemfile
-            cd ./Builds/BUILD_TARGET/$BUILD_NAME
+            cd ./Builds/$BUILD_TARGET/$BUILD_NAME
             eval "$($HOME/.rbenv/bin/rbenv init -)"
             $HOME/.rbenv/bin/rbenv local 2.3.3
             $HOME/.rbenv/bin/rbenv rehash
