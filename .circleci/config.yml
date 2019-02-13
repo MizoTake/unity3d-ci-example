@@ -136,10 +136,11 @@ jobs:
       - run:
           environment:
             PATH: $HOME/.rbenv/bin:$PATH
+            BUILD_NAME: SampleBuild
           command: |
             rbenv install 2.3.3
-            cp ./ci/Gemfile $BUILD_PATH/$BUILD_PATH
-            cd $BUILD_PATH/$BUILD_PATH
+            cp ./ci/Gemfile $BUILD_PATH/$BUILD_NAME
+            cd $BUILD_PATH/$BUILD_NAME
             eval "$(rbenv init -)"
             rbenv local 2.3.3
             rbenv rehash && \
