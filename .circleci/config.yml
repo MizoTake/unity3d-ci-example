@@ -18,6 +18,10 @@ references:
     command: |
       rm /Unity_v2018.ulf
       rm /root/.local/share/unity3d/Unity/Unity_lic.ulf
+  zipArhive: &zipArhive
+    command: |
+      chmod -R 755 ./ci/zip.sh
+      ./ci/zip.sh
 jobs:
   test_editmode:
     <<: *docker_image
@@ -77,6 +81,8 @@ jobs:
             ./ci/build.sh
       - run:
           <<: *remove_license_file
+      - run:
+          <<: *zipArhive
       - store_artifacts:
           path: './Builds/'
   build_StandaloneOSX:
@@ -96,6 +102,8 @@ jobs:
             ./ci/build.sh
       - run:
           <<: *remove_license_file
+      - run:
+          <<: *zipArhive
       - store_artifacts:
           path: './Builds/'
   build_Android:

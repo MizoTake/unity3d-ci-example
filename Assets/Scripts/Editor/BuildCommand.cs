@@ -4,6 +4,8 @@ using UnityEditor;
 
 static class BuildCommand
 {
+	static bool IsMac => GetArgument ("customBuildTarget").ToString ().ToLower ().Contains ("standaloneosx");
+	static bool IsWindows => GetArgument ("customBuildTarget").ToString ().ToLower ().Contains ("standalonewindows");
 	static bool IsAndroid => GetArgument ("customBuildTarget").ToString ().ToLower ().Contains ("android");
 
 	static string GetArgument (string name)
@@ -134,7 +136,7 @@ static class BuildCommand
 		var buildPath = GetBuildPath ();
 		var buildName = GetBuildName ();
 		var fixedBuildPath = GetFixedBuildPath (buildTarget, buildPath, buildName);
-
+		Console.WriteLine (fixedBuildPath);
 		if (IsAndroid)
 		{
 			EditorPrefs.SetString ("AndroidSdkRoot", getEnv ("ANDROID_HOME"));
