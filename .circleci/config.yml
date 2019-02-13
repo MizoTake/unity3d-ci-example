@@ -119,13 +119,6 @@ jobs:
             unzip -q android-sdk.zip -d android-sdk-linux && \
             rm -f android-sdk.zip && \
             ls -ahl android-sdk-linux
-            git clone https://github.com/sstephenson/rbenv.git ~/.rbenv
-            echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bash_profile
-            exec $SHELL -l
-            git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
-            rbenv install 2.3.3
-            rbenv global 2.3.3
-            rbenv rehash
       - checkout
       - run:
           <<: *setup_unity_license_env_var
@@ -140,8 +133,6 @@ jobs:
             ./ci/build.sh
             cp ./ci/Gemfile $BUILD_PATH/$BUILD_PATH
             cd $BUILD_PATH/$BUILD_PATH
-            rbenv exec gem install bundler
-            rbenv rehash
             bundle install --path .bundle
             bundle exec fastlane init
             bundle exec fastalen beta
