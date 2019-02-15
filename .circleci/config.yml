@@ -137,8 +137,8 @@ jobs:
             BUILD_NAME: SampleBuild
           command: |
             rbenv install 2.3.0-dev
-            cp ./ci/Android/Gemfile ./Builds/$BUILD_TARGET/Gemfile
-            cp -r ./ci/Android/fastlane ./Builds/$BUILD_TARGET/fastlane
+            cp ./ci/Android/Gemfile ./Builds/$BUILD_TARGET/$BUILD_NAME/Gemfile
+            cp -r ./ci/Android/fastlane ./Builds/$BUILD_TARGET/$BUILD_NAME/fastlane
             cd ./Builds/$BUILD_TARGET/$BUILD_NAME
             eval "$(rbenv init -)"
             rbenv local 2.3.0-dev
