@@ -141,6 +141,7 @@ jobs:
             ANDROID_HOME: /opt/android-sdk-linux
             BASH_ENV: ~/.bashrc
           command: |
+            touch ~/.bashrc
             echo 'export PATH=$GRADLE_HOME/bin:$PATH' >> $BASH_ENV
             source .bash_profile
             rbenv install 2.3.0-dev
