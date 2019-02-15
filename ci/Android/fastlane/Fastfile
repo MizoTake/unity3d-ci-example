@@ -1,0 +1,36 @@
+default_platform :android
+
+platform :android do
+  before_all do
+     ENV["SLACK_URL"] = "slackのweb hookのurl"
+  end
+
+  desc "Runs all the tests"
+  lane :test do
+    gradle(task: "test")
+  end
+
+  desc "Submit a new Beta Build to Crashlytics Beta"
+  lane :beta do
+    gradle(task: "assembleDebug")
+  end
+
+  desc "Deploy a new version to the Google Play"
+  lane :deploy do
+    gradle(task: "assembleRelease")
+    supply
+  end
+
+  after_all do |lane|
+    slack(
+        message: ":tada: Successfully deployed new App Update.＼(^o^)／"
+      )
+  end
+
+  error do |lane, exception|
+    slack(
+       message: exception.message,
+       success: false
+    )
+  end
+end

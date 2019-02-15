@@ -113,7 +113,7 @@ jobs:
     steps:
       - run:
           command: |
-            apt-get update && apt-get install -y bison git rbenv ruby-build autoconf build-essential curl file m4 ruby texinfo libbz2-dev libcurl4-openssl-dev libexpat-dev libncurses-dev zlib1g-dev zip unzip libreadline-dev && git --version
+            apt-get update && apt-get install -y bison git rbenv ruby-build ruby-dev autoconf build-essential curl file m4 ruby texinfo libbz2-dev libcurl4-openssl-dev libexpat-dev libncurses-dev zlib1g-dev zip unzip libreadline-dev && git --version
             cd /opt && \
             wget -q https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip -O android-sdk.zip && \
             unzip -q android-sdk.zip -d android-sdk-linux && \
@@ -137,7 +137,8 @@ jobs:
             BUILD_NAME: SampleBuild
           command: |
             rbenv install 2.3.0-dev
-            cp ./ci/Gemfile ./Builds/$BUILD_TARGET/Gemfile
+            cp ./ci/Android/Gemfile ./Builds/$BUILD_TARGET/Gemfile
+            cp -r ./ci/Android/fastlane ./Builds/$BUILD_TARGET/fastlane
             cd ./Builds/$BUILD_TARGET/$BUILD_NAME
             eval "$(rbenv init -)"
             rbenv local 2.3.0-dev
@@ -145,7 +146,6 @@ jobs:
             rbenv exec gem install bundler
             rbenv rehash
             bundle install --path .bundle
-            bundle exec fastlane init
             bundle exec fastalen beta
       - run:
           <<: *remove_license_file
