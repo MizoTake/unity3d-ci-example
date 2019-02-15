@@ -146,7 +146,7 @@ jobs:
             rbenv exec gem install bundler
             rbenv rehash
             bundle install --path .bundle
-            bundle exec fastalen beta
+            bundle exec fastlane beta
       - run:
           <<: *remove_license_file
       - store_artifacts:
