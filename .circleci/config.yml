@@ -119,7 +119,7 @@ jobs:
             unzip -q android-sdk.zip -d android-sdk-linux && \
             rm -f android-sdk.zip && \
             ls -ahl android-sdk-linux
-            wget https://services.gradle.org/distributions/gradle-3.2-all.zip --no-check-certificate \
+            wget https://services.gradle.org/distributions/gradle-3.2-all.zip --no-check-certificate && \
             unzip gradle-3.2-all.zip -d /opt/gradle
       - checkout
       - run:
