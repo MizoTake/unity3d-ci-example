@@ -145,6 +145,7 @@ jobs:
             rbenv rehash
             rbenv exec gem install bundler
             rbenv rehash
+            gradle wrapper
             bundle install --path .bundle
             bundle exec fastlane beta
       - run:
