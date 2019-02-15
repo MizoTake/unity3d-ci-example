@@ -139,10 +139,7 @@ jobs:
             BUILD_NAME: SampleBuild
             GRADLE_HOME: /opt/gradle/gradle-2.14
             ANDROID_HOME: /opt/android-sdk-linux
-            BASH_ENV: ~/.bashrc
           command: |
-            touch ~/.bashrc
-            echo 'export PATH=$GRADLE_HOME/bin:$PATH' >> $BASH_ENV
             source .bash_profile
             rbenv install 2.3.0-dev
             cp ./ci/Android/Gemfile ./Builds/$BUILD_TARGET/$BUILD_NAME/Gemfile
@@ -153,7 +150,7 @@ jobs:
             rbenv rehash
             rbenv exec gem install bundler
             rbenv rehash
-            gradle wrapper
+            $GRADLE_HOME/bin/gradle wrapper
             bundle install --path .bundle
             bundle exec fastlane beta
       - run:
