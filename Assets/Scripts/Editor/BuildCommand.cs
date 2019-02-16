@@ -79,6 +79,11 @@ static class BuildCommand
 			// webgl produces a folder with index.html inside, there is no executable name for this buildTarget
 			buildName = "";
 		}
+		else if (IsAndroid)
+		{
+			PlayerSettings.productName = buildName;
+			buildName = "";
+		}
 		return buildPath + buildName;
 	}
 
