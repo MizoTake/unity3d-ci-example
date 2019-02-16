@@ -2,7 +2,7 @@ default_platform :android
 
 platform :android do
   before_all do
-     ENV["SLACK_URL"] = "slackのweb hookのurl"
+    ENV["SLACK_URL"] = "slack web hook url"
   end
 
   desc "Unity Project Export Android Project"
@@ -21,8 +21,7 @@ platform :android do
     exportAndroidProject
     gradle(
       task: "assemble",
-      build_type: 'Debug',
-      flags: "--stacktrace -PdisablePredex --no-daemon -Dscan"
+      build_type: 'Debug'
     )
   end
 
@@ -34,7 +33,7 @@ platform :android do
 
   after_all do |lane|
     slack(
-        message: ":tada: Successfully deployed new App Update.＼(^o^)／"
+        message: ":tada: Successfully deployed new App Build."
       )
   end
 
