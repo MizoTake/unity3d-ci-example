@@ -40,4 +40,4 @@ fi
 ls -la $BUILD_PATH
 [ -n "$(ls -A $BUILD_PATH)" ] # fail job if build folder is empty
 
-cd CURRENT_PATH
+cd $CURRENT_PATH
