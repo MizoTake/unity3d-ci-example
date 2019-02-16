@@ -137,7 +137,7 @@ jobs:
           environment:
             BUILD_TARGET: Android
             BUILD_NAME: SampleBuild
-            GRADLE_HOME: /opt/gradle/gradle
+            GRADLE_HOME: /opt/gradle
             ANDROID_HOME: /opt/android-sdk-linux
           command: |
             rbenv install 2.3.0-dev
