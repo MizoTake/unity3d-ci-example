@@ -136,7 +136,7 @@ jobs:
           command: |
             mkdir -p ./Builds ./Builds/$BUILD_TARGET ./Builds/$BUILD_TARGET/$BUILD_NAME
             rbenv install 2.3.0-dev
-            cp -r ./ci/$BUILD_TARGET/ ./Builds/$BUILD_TARGET/$BUILD_NAME/
+            cp -pR ./ci/$BUILD_TARGET/* ./Builds/$BUILD_TARGET/$BUILD_NAME/
             cd ./Builds/$BUILD_TARGET/$BUILD_NAME
             eval "$(rbenv init -)"
             rbenv local 2.3.0-dev
