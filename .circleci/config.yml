@@ -134,7 +134,7 @@ jobs:
             JAVA_HOME: /usr/lib/jvm/java-8-openjdk-amd64/jre/
             BUILD_PATH: /project/Builds/$BUILD_TARGET/
           command: |
-            mkdir -p ./Builds ./$BUILD_PATH ./$BUILD_PATH/$BUILD_NAME
+            mkdir -p ./Builds ./Builds/$BUILD_PATH ./Builds/$BUILD_PATH/$BUILD_NAME
             rbenv install 2.3.0-dev
             cp -r ./ci/$BUILD_TARGET/ ./Builds/$BUILD_TARGET/$BUILD_NAME/
             cd ./Builds/$BUILD_TARGET/$BUILD_NAME
