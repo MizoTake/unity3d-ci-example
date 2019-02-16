@@ -5,6 +5,9 @@ set -x
 
 echo "Building for $BUILD_TARGET"
 
+export CURRENT_PATH=$(pwd)
+cd /root/project
+
 export BUILD_PATH=./Builds/$BUILD_TARGET/
 mkdir -p $BUILD_PATH
 
@@ -36,3 +39,5 @@ fi
 
 ls -la $BUILD_PATH
 [ -n "$(ls -A $BUILD_PATH)" ] # fail job if build folder is empty
+
+cd CURRENT_PATH
