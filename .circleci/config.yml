@@ -159,6 +159,9 @@ jobs:
       - run:
           <<: *remove_license_file
       - store_artifacts:
+          environment:
+            BUILD_TARGET: Android
+            BUILD_NAME: SampleBuild
           path: './Builds/$BUILD_TARGET/$BUILD_NAME/build/outputs/apk/debug/$BUILD_NAME-deubg.apk'
 workflows:
   version: 2
