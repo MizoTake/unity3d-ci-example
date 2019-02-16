@@ -150,6 +150,7 @@ jobs:
             rbenv rehash
             rbenv exec gem install bundler
             rbenv rehash
+            chmod +x $GRADLE_HOME/bin/gradle
             $GRADLE_HOME/bin/gradle wrapper
             bundle install --path .bundle
             bundle exec fastlane beta
