@@ -20,8 +20,8 @@ platform :android do
   lane :beta do
     exportAndroidProject
     gradle(
-      project_dir: $BUILD_PATH,
-      task: "assembleDebug"
+      task: "assemble",
+      build_type: 'Debug'
     )
   end
 
