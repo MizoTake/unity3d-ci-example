@@ -8,7 +8,7 @@ platform :android do
   desc "Unity Project Export Android Project"
   lane :exportAndroidProject do
     sh "chmod -R 755 /root/project//ci/build.sh"
-    sh "bash /root/project/ci/build.sh"
+    sh "/root/project/ci/build.sh"
   end
 
   desc "Runs all the tests"
