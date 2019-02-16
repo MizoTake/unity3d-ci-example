@@ -1,9 +1,9 @@
 default_platform :android
 
 platform :android do
-  before_all do
-    ENV["SLACK_URL"] = "slack web hook url"
-  end
+  # before_all do
+  #   ENV["SLACK_URL"] = "slack web hook url"
+  # end
 
   desc "Unity Project Export Android Project"
   lane :exportAndroidProject do
@@ -31,11 +31,11 @@ platform :android do
     supply
   end
 
-  after_all do |lane|
-    slack(
-        message: ":tada: Successfully deployed new App Build."
-      )
-  end
+  # after_all do |lane|
+  #   slack(
+  #       message: ":tada: Successfully deployed new App Build."
+  #     )
+  # end
 
   error do |lane, exception|
     slack(
