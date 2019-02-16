@@ -126,31 +126,24 @@ jobs:
           <<: *setup_unity_license_env_var
       - run:
           environment:
-            BUILD_TARGET: Android
             BUNDLE_IDENTIFIER: com.sample.circleci
-            BUILD_NAME: SampleBuild
-            ANDROID_HOME: /opt/android-sdk-linux
-          command: |
-            chmod -R 755 ./ci/build.sh
-            ./ci/build.sh
-      - run:
-          environment:
             BUILD_TARGET: Android
             BUILD_NAME: SampleBuild
             GRADLE_HOME: /opt/gradle/gradle-3.2
             ANDROID_HOME: /opt/android-sdk-linux
             JAVA_HOME: /usr/lib/jvm/java-8-openjdk-amd64/jre/
+            BUILD_PATH: /project/Builds/$BUILD_TARGET/
           command: |
+            mkdir -p $BUILD_PATH
             rbenv install 2.3.0-dev
-            cp ./ci/Android/Gemfile ./Builds/$BUILD_TARGET/$BUILD_NAME/Gemfile
-            cp -r ./ci/Android/fastlane ./Builds/$BUILD_TARGET/$BUILD_NAME/fastlane
+            cp ./ci/$BUILD_TARGET/Gemfile ./Builds/$BUILD_TARGET/$BUILD_NAME/Gemfile
+            cp -r ./ci/$BUILD_TARGET/fastlane ./Builds/$BUILD_TARGET/$BUILD_NAME/fastlane
             cd ./Builds/$BUILD_TARGET/$BUILD_NAME
             eval "$(rbenv init -)"
             rbenv local 2.3.0-dev
             rbenv rehash
             rbenv exec gem install bundler
             rbenv rehash
-            chmod +x $GRADLE_HOME/bin/gradle
             $GRADLE_HOME/bin/gradle wrapper
             bundle install --path .bundle
             bundle exec fastlane beta
