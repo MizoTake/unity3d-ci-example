@@ -136,8 +136,7 @@ jobs:
           command: |
             mkdir -p $BUILD_PATH $BUILD_PATH/$BUILD_NAME
             rbenv install 2.3.0-dev
-            cp ./ci/$BUILD_TARGET/Gemfile ./Builds/$BUILD_TARGET/$BUILD_NAME/Gemfile
-            cp -r ./ci/$BUILD_TARGET/fastlane ./Builds/$BUILD_TARGET/$BUILD_NAME/fastlane
+            cp -r ./ci/$BUILD_TARGET/ ./Builds/$BUILD_TARGET/$BUILD_NAME/
             cd ./Builds/$BUILD_TARGET/$BUILD_NAME
             eval "$(rbenv init -)"
             rbenv local 2.3.0-dev
