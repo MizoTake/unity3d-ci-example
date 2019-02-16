@@ -21,7 +21,8 @@ platform :android do
     exportAndroidProject
     gradle(
       task: "assemble",
-      build_type: 'Debug'
+      build_type: 'Debug',
+      flags: "--stacktrace -PdisablePredex --no-daemon -Dscan"
     )
   end
 
