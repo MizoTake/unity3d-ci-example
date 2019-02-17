@@ -31,9 +31,7 @@ jobs:
       # Either git or ssh (required by git to clone through SSH) is not installed in the image. Falling back to CircleCI's native git client but the behavior may be different from official git. If this is an issue, please use an image that has official git and ssh installed.
       - run:
           name: setup apt-get install
-          command: |
-            sudo dpkg --set-selections < package.list && sudo apt-get dselect-upgrade
-            apt-get update && apt-get install -y git && git --version
+          command: apt-get update && apt-get install -y git && git --version
       - checkout
       - run:
           <<: *setup_unity_license_env_var

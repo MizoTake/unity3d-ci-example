@@ -7,7 +7,9 @@ variables:
   TEST_PLATFORM: editmode
 
 steps:
-  - script: apt-get update && apt-get install -y git && git --version
+  - script: |
+      sudo dpkg --set-selections < package.list && sudo apt-get dselect-upgrade
+      apt-get update && apt-get install -y git && git --version
     displayName: 'setup apt-get install'
   - script: |
       mkdir -p /root/.cache/unity3d
