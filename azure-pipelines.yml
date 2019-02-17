@@ -1,5 +1,5 @@
-pool:
-  vmImage: 'ubuntu-16.04'
+pool: 
+  vmImage: ubuntu-16.04
 
 container: gableroux/unity3d:2018.3.3f1
 
@@ -7,7 +7,7 @@ variables:
   TEST_PLATFORM: editmode
 
 steps:
-  - script: "sudo apt-get update && apt-get install -y git && git --version"
+  - script: apt-get update && apt-get install -y git && git --version
     displayName: 'setup apt-get install'
   - script: |
       mkdir -p /root/.cache/unity3d
