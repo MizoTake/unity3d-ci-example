@@ -1,5 +1,7 @@
-container:
-  image: gableroux/unity3d:2018.3.3f1
+pool:
+  vmImage: 'ubuntu-16.04'
+
+container: gableroux/unity3d:2018.3.3f1
 
 steps:
   - script: |
